@@ -1,46 +1,26 @@
-using UnityEngine;
-public abstract class Effect
+public class Effect
 {
-    public Effect(int hpSec, float duration)
+    /// <summary>
+    /// Effect parameters
+    /// </summary>
+    public Effect(float value, float duration)
     {
-        HpSec = hpSec;
-        Duration = duration;
-    }
-    public abstract void EffectValue();
-
-    public abstract int HpSec { get; set; }
-
-    public abstract float Duration { get; set; }
-}
-
-public class Buff : Effect
-{
-    public Buff(int hpSec,float duration) : base(hpSec,duration)
-    {
+        Value = value;
+        _duration = duration;
     }
 
-    public override int HpSec { get; set; }
+    public virtual float Value { get; private set; }
 
-    public override float Duration { get; set; }
-
-    public override void EffectValue()
+    protected float _duration;
+    public virtual float Duration 
     {
-         Health.PlayerHealth += HpSec;
-    }
-}
-
-public class DeBuff : Effect
-{
-    public DeBuff(int hpSec, float duration) : base(hpSec, duration)
-    {
-    }
-
-    public override int HpSec { get; set; }
-
-    public override float Duration { get; set; }
-
-    public override void EffectValue()
-    {
-        Health.PlayerHealth -= HpSec;
+        get
+        {
+            return _duration;
+        }
+        set
+        {
+            if (value <= _duration) _duration = value;
+        }
     }
 }
