@@ -8,9 +8,15 @@ public class Brain : MonoBehaviour
     [SerializeField]
     private Collectable _collectableItem = null;
 
+    [SerializeField]
+    private BackGroundMusic _music;
+
     private void Update()
     {
-        FindItem();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            FindItem();
+        }
     }
 
     private void FindItem()
