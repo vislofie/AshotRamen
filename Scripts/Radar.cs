@@ -64,5 +64,4 @@ public class Radar : Skill
         }
         return collider;
     }
-
 }

@@ -4,11 +4,11 @@ public abstract class Skill : MonoBehaviour
 {
     public void DestroySkill()
     {
-        GetComponent<Skill>().enabled = false;
+        this.enabled = false;
     }
 
     public void ApplySkill()
     {
-        GetComponent<Skill>().enabled = true;
+        this.enabled = true;
     }
 }

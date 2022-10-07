@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Brain : MonoBehaviour
 {
@@ -11,11 +12,32 @@ public class Brain : MonoBehaviour
     [SerializeField]
     private BackGroundMusic _music;
 
+    private List<Skill> _skills = new();
+
+    private void Start()
+    {
+        _skills.AddRange(gameObject.GetComponents<Skill>());
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             FindItem();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for(int i = 0; i < _skills.Count; i++)
+            {
+                _skills[i].DestroySkill();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            for (int i = 0; i < _skills.Count; i++)
+            {
+                _skills[i].ApplySkill();
+            }
         }
     }
 
