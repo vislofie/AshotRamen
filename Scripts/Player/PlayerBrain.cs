@@ -53,13 +53,22 @@ public class PlayerBrain : MonoBehaviour
             StartCoroutine(ResetDodgeAttack(4.0f));
         }
 
-        if (Input.GetMouseButtonDown(0) && _activatedDodgeAttack)
+        else if (Input.GetMouseButtonDown(0) && _activatedDodgeAttack)
         {
             bool hitTarget = _qte.Click();
 
-            if (hitTarget && _enemyTouching)
+            if (_enemyTouching)
             {
-                _enemyTouching.Die();
+                if (hitTarget)
+                {
+                    _enemyTouching.Die();
+                }
+
+                else
+                {
+                    _chars.HP -= 10;
+                }
+
                 _qte.DeactivateQTE();
 
                 StopAllCoroutines();
