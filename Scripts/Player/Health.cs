@@ -1,29 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerChars : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    private float _hp;
-    public float HP
+    public float PlayerHealth 
     {
-        get { return _hp; }
-        set
+        get => _playerHealth;
+
+        set 
         {
-            _hp = Mathf.Clamp(value, 0, _maxHP);
+            _playerHealth = Mathf.Clamp(value, 0, 100);
         }
     }
 
-    private float _maxHP;
-    public float MaxHP => _maxHP;
-
+    private float _playerHealth = 100;
     private List<Effect> _effects = new List<Effect>();
 
     private void Start()
     {
-        _maxHP = 100;
-        _hp = _maxHP;
-
         StartCoroutine(CalculateEffects(1.0f));
     }
 
@@ -34,7 +30,7 @@ public class PlayerChars : MonoBehaviour
             for (int i = _effects.Count - 1; i >= 0; i--)
             {
                 _effects[i].Duration = _effects[i].Duration - sec;
-                HP += _effects[i].Value;
+                PlayerHealth += _effects[i].Value;
 
                 if (_effects[i].Duration <= 0)
                     _effects.Remove(_effects[i]);
